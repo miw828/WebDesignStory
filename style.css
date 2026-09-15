@@ -1,20 +1,219 @@
-@charset "UTF-8";
-/* CSS Document */
-body{
-	
-	text-align: center;
-	font-family: Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", "serif"; 
-	background-color: #E2C4A9;
-	color: #200A0B; 
+/* ============================================================
+   Odysseus & Polyphemus — Web Design Story
+   Palette + type pulled from the style tile:
+   tan ground, deep maroon, ochre gold, meander (Greek key) trim
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Tangerine:wght@700&display=swap');
+
+:root{
+  --tan:        #dcb989;
+  --tan-deep:   #c69a63;
+  --key-line:   #6b4321;
+  --maroon:     #5c1f1f;
+  --maroon-deep:#3f1414;
+  --gold:       #b9791a;
+  --cream:      #f4e8cf;
+  --ink:        #2c1c10;
+  --ink-soft:   #4a3420;
+
+  --key-tile: 40px;
+  --key-band: 26px;
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image: url("../Downloads/texture.jpg");
-    background-repeat: repeat;
-    opacity: 0.4; /* lower = lighter */
-    pointer-events: none;
-    z-index: -1;
+*{ box-sizing: border-box; }
+
+html{ scroll-behavior: smooth; }
+
+body{
+  margin: 0;
+  padding: var(--key-band) 24px;
+  background-color: var(--tan);
+  background-image:
+    radial-gradient(circle at 20% 15%, rgba(255,255,255,0.10), transparent 40%),
+    radial-gradient(circle at 80% 85%, rgba(0,0,0,0.06), transparent 45%);
+  color: var(--ink);
+  font-family: 'EB Garamond', serif;
+  min-height: 100vh;
+}
+
+/* ---------- Greek key (meander) trim, top & bottom of page ---------- */
+body::before,
+body::after{
+  content: "";
+  display: block;
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: var(--key-band);
+  background-color: var(--tan-deep);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='26' viewBox='0 0 40 26'%3E%3Cpath d='M0 20 H8 V6 H24 V14 H16 V10 H20 V16 H12 V2 H32 V20 H40' fill='none' stroke='%236b4321' stroke-width='3.5' stroke-linecap='square'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: left center;
+  background-size: var(--key-tile) var(--key-band);
+  z-index: 5;
+  box-shadow: 0 0 0 1px rgba(107,67,33,0.35) inset;
+}
+body::before{ top: 0; }
+body::after{ bottom: 0; }
+
+/* ---------- Page card ---------- */
+main{
+  position: relative;
+  max-width: 700px;
+  margin: 12px auto;
+  background: var(--cream);
+  padding: 56px 60px 64px;
+  border: 1px solid rgba(107,67,33,0.35);
+  box-shadow:
+    0 1px 0 rgba(255,255,255,0.4) inset,
+    0 18px 40px rgba(43,28,16,0.25);
+}
+
+/* thin key trim framing the card itself, echoing the style tile */
+main::before,
+main::after{
+  content: "";
+  display: block;
+  height: 14px;
+  margin: 0 -60px 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14' viewBox='0 0 28 14'%3E%3Cpath d='M0 11 H6 V3 H16 V8 H11 V6 H14 V9 H8 V1 H22 V11 H28' fill='none' stroke='%23b9791a' stroke-width='2.4' stroke-linecap='square'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 28px 14px;
+  opacity: 0.85;
+}
+main::after{ margin: 48px -60px 0; }
+
+/* ============================================================
+   Typography
+   ============================================================ */
+
+h1{
+  margin: 0 0 6px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  line-height: 1.1;
+  text-align: center;
+  color: var(--maroon-deep);
+  letter-spacing: 0.3px;
+}
+
+h3{
+  margin: 0 0 44px;
+  text-align: center;
+  font-family: 'Tangerine', cursive;
+  font-weight: 700;
+  font-size: 2.1rem;
+  color: var(--gold);
+  line-height: 1;
+}
+
+h4{
+  margin: 44px 0 18px;
+  text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-variant: small-caps;
+  letter-spacing: 1px;
+  font-size: 1.5rem;
+  color: var(--maroon);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+h4::before,
+h4::after{
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to var(--dir, right), transparent, var(--tan-deep) 40%, var(--tan-deep) 60%, transparent);
+}
+h4::after{ --dir: left; }
+
+p{
+  margin: 0 0 22px;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  text-align: justify;
+  hyphens: auto;
+  color: var(--ink-soft);
+  max-width: 62ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* first real paragraph gets a dropped, illuminated-manuscript-style cap */
+div.p p{
+  font-style: italic;
+}
+div.p p::first-letter{
+  font-family: 'Cormorant Garamond', serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 3.4em;
+  float: left;
+  line-height: 0.78;
+  padding: 6px 8px 0 0;
+  color: var(--maroon);
+}
+
+/* ---------- Spoken lines ---------- */
+/* h5 = Polyphemus / the Cyclops — heavier, maroon, right-leaning */
+h5{
+  margin: 0 auto 14px;
+  max-width: 54ch;
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.12rem;
+  line-height: 1.6;
+  color: var(--maroon);
+  padding: 4px 0 4px 22px;
+  border-left: 3px solid var(--maroon);
+}
+h5 + h5{ margin-top: -8px; }
+
+/* h6 = Odysseus and his men — gold, left-leaning, quote marks */
+h6{
+  margin: 0 auto 14px;
+  max-width: 54ch;
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: 1.12rem;
+  line-height: 1.6;
+  color: var(--gold);
+  text-align: right;
+  padding: 4px 22px 4px 0;
+  border-right: 3px solid var(--gold);
+}
+h6 + h6{ margin-top: -8px; }
+
+/* the closing lines are set as h3, restyle that instance distinctly
+   from the byline by targeting the last h3 in the document */
+main > h3:last-of-type{
+  margin-top: 48px;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.3rem;
+  color: var(--ink);
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 680px){
+  body{ padding: var(--key-band) 10px; }
+  main{ padding: 40px 24px 48px; }
+  main::before, main::after{ margin-left: -24px; margin-right: -24px; }
+  h5, h6{ max-width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
 }
