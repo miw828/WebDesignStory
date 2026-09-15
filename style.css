@@ -60,7 +60,7 @@ body::after{ bottom: 0; }
 /* ---------- Page card ---------- */
 main{
   position: relative;
-  max-width: 700px;
+  max-width: 200px;
   margin: 12px auto;
   background: var(--cream);
   padding: 56px 60px 64px;
