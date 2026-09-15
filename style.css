@@ -36,6 +36,24 @@ body{
   font-family: 'EB Garamond', serif;
   min-height: 100vh;
 }
+body{
+	
+	text-align: center;
+	font-family: Baskerville, "Palatino Linotype", Palatino, "Century Schoolbook L", "Times New Roman", "serif"; 
+	background-color: #E2C4A9;
+	color: #200A0B; 
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("../Downloads/texture.jpg");
+    background-repeat: repeat;
+    opacity: 0.4; /* lower = lighter */
+    pointer-events: none;
+    z-index: -1;
+}
 
 /* ---------- Greek key (meander) trim, top & bottom of page ---------- */
 body::before,
