@@ -60,7 +60,6 @@ body::after{ bottom: 0; }
 /* ---------- Page card ---------- */
 main{
   position: relative;
-  max-width: 200px;
   margin: 12px auto;
   background: var(--cream);
   padding: 56px 60px 64px;
@@ -144,11 +143,65 @@ p{
   margin-right: auto;
 }
 
-/* first real paragraph gets a dropped, illuminated-manuscript-style cap */
-div.p p{
+/* ---------- Story paragraphs: zig-zag boxes ---------- */
+/* Each narrative paragraph lives in its own card, alternating
+   left/right down the page. Quotes (h5/h6) sit outside these
+   boxes entirely, so they stay centered and unaffected. */
+
+.story-box{
+  position: relative;
+  width: 68%;
+  margin: 0 0 38px;
+  padding: 24px 28px;
+  background: rgba(255,255,255,0.4);
+  border: 1px solid rgba(107,67,33,0.25);
+  box-shadow: 0 8px 18px rgba(43,28,16,0.14);
+}
+
+.story-box p{
+  margin: 0;
+  max-width: none;
+  text-align: left;
+}
+
+/* small key-motif corner flourish, mirrored per side */
+.story-box::before{
+  content: "";
+  position: absolute;
+  top: -1px;
+  width: 22px;
+  height: 22px;
+  border-top: 3px solid var(--gold);
+}
+
+.story-box.left{
+  margin-left: 0;
+  margin-right: auto;
+  border-left: 3px solid var(--maroon);
+}
+.story-box.left::before{
+  left: -1px;
+  border-left: 3px solid var(--gold);
+}
+
+.story-box.right{
+  margin-left: auto;
+  margin-right: 0;
+  border-right: 3px solid var(--gold);
+}
+.story-box.right p{
+  text-align: right;
+}
+.story-box.right::before{
+  right: -1px;
+  border-right: 3px solid var(--maroon);
+}
+
+/* first story paragraph keeps the illuminated drop cap */
+main > .story-box:first-of-type p{
   font-style: italic;
 }
-div.p p::first-letter{
+main > .story-box:first-of-type p::first-letter{
   font-family: 'Cormorant Garamond', serif;
   font-style: normal;
   font-weight: 600;
@@ -163,7 +216,7 @@ div.p p::first-letter{
 /* h5 = Polyphemus / the Cyclops — heavier, maroon, right-leaning */
 h5{
   margin: 0 auto 14px;
-  max-width: 54ch;
+
   font-family: 'EB Garamond', serif;
   font-style: italic;
   font-weight: 500;
@@ -178,7 +231,7 @@ h5 + h5{ margin-top: -8px; }
 /* h6 = Odysseus and his men — gold, left-leaning, quote marks */
 h6{
   margin: 0 auto 14px;
-  max-width: 54ch;
+  
   font-family: 'EB Garamond', serif;
   font-style: italic;
   font-weight: 500;
@@ -212,6 +265,16 @@ main > h3:last-of-type{
   main{ padding: 40px 24px 48px; }
   main::before, main::after{ margin-left: -24px; margin-right: -24px; }
   h5, h6{ max-width: 100%; }
+
+  /* drop the zig-zag on small screens: full-width, left-aligned boxes */
+  .story-box,
+  .story-box.left,
+  .story-box.right{
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .story-box.right p{ text-align: left; }
 }
 
 @media (prefers-reduced-motion: reduce){
