@@ -44,16 +44,6 @@ body{
 	color: #200A0B; 
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background-image: url("../Downloads/texture.jpg");
-    background-repeat: repeat;
-    opacity: 0.4; /* lower = lighter */
-    pointer-events: none;
-    z-index: -1;
-}
 
 /* ---------- Greek key (meander) trim, top & bottom of page ---------- */
 body::before,
@@ -79,7 +69,12 @@ body::after{ bottom: 0; }
 main{
   position: relative;
   margin: 12px auto;
-  background: var(--cream);
+  background-color: var(--cream);
+  background-image:
+    linear-gradient(rgba(244,232,207,0.5), rgba(244,232,207,0.5)),
+    url("image/texture.jpg");
+  background-repeat: repeat;
+  background-size: auto, 220px 220px; /* adjust 220px to your texture's natural tile size */
   padding: 56px 60px 64px;
   border: 1px solid rgba(107,67,33,0.35);
   box-shadow:
@@ -238,9 +233,10 @@ h5{
   font-family: 'EB Garamond', serif;
   font-style: italic;
   font-weight: 500;
-  font-size: 1.12rem;
+  font-size: 1.25rem;
   line-height: 1.6;
   color: var(--maroon);
+  text-align: left;
   padding: 4px 0 4px 22px;
   border-left: 3px solid var(--maroon);
 }
