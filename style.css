@@ -100,7 +100,7 @@ main::after{ margin: 48px -60px 0; }
    Typography
    ============================================================ */
 
-h1{
+h1,a{
   margin: 0 0 6px;
   font-family: 'Cormorant Garamond', serif;
   font-style: italic;
